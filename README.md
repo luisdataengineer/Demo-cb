@@ -25,12 +25,7 @@ Este patrón ayuda a prevenir fallas en cascada y a manejar los errores de forma
 |-- service-a/
 |   |-- app.py             # Cliente Flask con Circuit Breaker
 |   |-- requirements.txt   # Dependencias de Service A
-|   |-- Dockerfile # Dockerfile para Service A 
-|
-|-- service-b/ 
-| |-- app_b.py # Servicio Flask dependiente (simula fallos/latencia) 
-| |-- requirements_b.txt # Dependencias de Service B 
-| |-- Dockerfile         # Dockerfile para Service B
+|   -- Dockerfile # Dockerfile para Service A | |-- service-b/ | |-- app_b.py # Servicio Flask dependiente (simula fallos/latencia) | |-- requirements_b.txt # Dependencias de Service B |-- Dockerfile         # Dockerfile para Service B
 |
 |-- docker-compose.yml     # Orquesta los servicios
 `-- README.md              # Este archivo

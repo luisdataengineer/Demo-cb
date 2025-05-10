@@ -20,12 +20,19 @@ El patrón Circuit Breaker es una técnica utilizada en el desarrollo de softwar
 Este patrón ayuda a prevenir fallas en cascada y a manejar los errores de forma más elegante.
 
 ## Estructura del Proyecto
+![image](https://github.com/user-attachments/assets/31195613-ba12-45ef-8c46-6afbccc48b22)
+
 /Demo-cb
 |
 |-- service-a/
 |   |-- app.py             # Cliente Flask con Circuit Breaker
 |   |-- requirements.txt   # Dependencias de Service A
-|   -- Dockerfile # Dockerfile para Service A | |-- service-b/ | |-- app_b.py # Servicio Flask dependiente (simula fallos/latencia) | |-- requirements_b.txt # Dependencias de Service B |-- Dockerfile         # Dockerfile para Service B
+|   |-- Dockerfile # Dockerfile para Service A 
+|
+|-- service-b/ 
+|   |-- app_b.py # Servicio Flask dependiente (simula fallos/latencia) 
+|   |-- requirements_b.txt # Dependencias de Service B 
+|   |-- Dockerfile         # Dockerfile para Service B
 |
 |-- docker-compose.yml     # Orquesta los servicios
 `-- README.md              # Este archivo

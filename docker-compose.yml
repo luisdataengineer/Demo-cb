@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  service-a:
+    build: ./service-a # Asume que tienes una carpeta service-a con su Dockerfile y app.py
+    ports:
+      - "5000:5000"
+    restart: unless-stopped
+    environment: # Opcional: para configurar el Circuit Breaker desde el compose
+      - CIRCUIT_FAIL_MAX=3
+      - CIRCUIT_RESET_TIMEOUT=20 # segundos
+    depends_on:
+      service-b:
+        condition: service_healthy # Espera a que el healthcheck de service-b pase
+    healthcheck: # Healthcheck para service-a
+      test: ["CMD", "curl", "-f", "http://localhost:5000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    networks:
+      - app-net
+
+  service-b:
+    build: ./service-b # Asume que tienes una carpeta service-b con su Dockerfile y app_b.py
+    ports:
+      - "5001:5001" # Expones el puerto para poder controlarlo directamente desde el navegador/curl
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 15s # Intervalo más corto para que se recupere más rápido en la demo
+      timeout: 5s
+      retries: 3
+    networks:
+      - app-net
+
+networks:
+  app-net:
+    driver: bridge
